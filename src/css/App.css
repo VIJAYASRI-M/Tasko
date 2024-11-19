@@ -1,5 +1,15 @@
 .App {
-  text-align: center;
+  height: 80vh;
+  width: auto;
+  background-color: #f6fafb;
+  padding: 30px;
+  margin: 50px 30px;
+  border-radius: 30px;
+}
+
+.TaskContainer{
+  display: flex;
+  height: auto;
 }
 
 .App-logo {

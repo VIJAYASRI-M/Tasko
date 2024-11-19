@@ -1,0 +1,21 @@
+.tasks{
+    height: 300px;
+    width: 30%;
+    padding: 15px;
+    filter: hue-rotate(10px);
+    margin: 15px;
+    border-radius: 30px;
+}
+
+.title{
+    text-align: center;
+    filter: contrast(10px);
+}
+
+.Task{
+    width: auto;
+    background-color: aliceblue;
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 10px;
+}
