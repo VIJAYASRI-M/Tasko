@@ -9,7 +9,9 @@
 
 .TaskContainer{
   display: flex;
-  height: auto;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 .App-logo {
