@@ -5,19 +5,18 @@ import { Droppable } from "react-beautiful-dnd";
 
 const Tasks = ({ content }) => {
   return (
-    <Droppable droppableId={content.id}>
+    <Droppable key={content.id} droppableId={content.id}>
       {(provided) => (
-        <div className="tasks" style={{ backgroundColor: content.color }} ref={provided.innerRef} {...provided.droppableProps}>
+        <div className="tasks" 
+        style={{ backgroundColor: content.color }} 
+        ref={provided.innerRef} 
+        {...provided.droppableProps}>
           <div className="title" style={{ color: content.titleColor }}>
             <b>{content.title}</b>
           </div>
-          {
-            console.log(content.title)
-          }
           {content.tasks.map((item, index) => {
-            return <Task task={item} index={index} key={index}/>;
+            return <Task task={item} index={index} key={item.id}/>;
           })}
-          <Task />
           {provided.placeholder}
         </div>
       )}
