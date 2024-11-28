@@ -12,7 +12,7 @@ const Modal = ({isOpen,closeModal,children}) => {
   return (
     <div className='modal' ref={backgroundRef} onClick={onClickBackground}>
         <div className="content">
-            <CgClose onClick={closeModal} style={{cursor:"pointer"}}/>
+            <CgClose onClick={closeModal} className='close-icon'/>
             {children}
         </div>
     </div>

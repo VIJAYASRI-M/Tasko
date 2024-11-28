@@ -58,3 +58,24 @@
     justify-content: center;
     cursor: pointer;
 }
+
+.TaskContainer .input{
+    height: 35px;
+    width: 200px;
+    margin: 15px;
+    padding: 5px;
+    font-size: 18px;
+    border: 2px solid #0869be;
+    border-radius: 5px;
+}
+
+.TaskContainer .color-input{
+    width: 50px;
+    height: 50px;
+    margin: 6px 0;
+}
+
+
+.TaskContainer .modal h3{
+    margin: 0 auto;
+}

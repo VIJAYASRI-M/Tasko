@@ -3,7 +3,6 @@ export const listItems = [
       id:"Todo",
       title:"To Do",
       color:"#FA9189",
-      titleColor:'#b54e47',
       tasks:[
         {
             id:'t14',
@@ -15,7 +14,6 @@ export const listItems = [
       id:"InProgress",
       title:"In Progress",
       color:"#FFE699",
-      titleColor:'#b0933b',
       tasks:[
         {
             id:'t13',
@@ -27,7 +25,6 @@ export const listItems = [
       id:"OnApproval",
       title:"On Approval",
       color:"#C1C9E8",
-      titleColor:'#5d6fb5',
       tasks:[
         {
             id:'t1',
@@ -47,7 +44,6 @@ export const listItems = [
       id:"Done",
       title:"Done",
       color:"#B3F5BC",
-      titleColor:'#49af56',
       tasks:[
         {
             id:'t11',

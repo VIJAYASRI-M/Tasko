@@ -12,10 +12,6 @@ function App() {
 
   const dispatch = useDispatch();
   const taskContainer = useSelector((state) => state.tasks);
-  const [open,setOpen] = useState(false);
-  const handleOpen = ()=>{
-    setOpen(true);
-  }
   const onDragEnd = (result) => {
     const { source, destination } = result;
     if (
@@ -33,15 +29,10 @@ function App() {
         {/* <Header/>
         <Topbar/> */}
         <div className="TaskContainer">
-          {taskContainer.map((item, index) => {
-            return <Tasks content={item} key={item.id} modal={handleOpen}/>;
+          {taskContainer.map((item) => {
+            return <Tasks content={item} key={item.id}/>;
           })}
         </div>
-        <Modal isOpen={open} closeModal={()=>setOpen(false)}>
-          <>
-            <p>helloooo</p>
-          </>
-        </Modal>
       </div>
     </DragDropContext>
   );
