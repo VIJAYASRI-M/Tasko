@@ -8,31 +8,36 @@ import { addTask, addTaskContainer } from "../redux/TaskSlice";
 import Modal from "./Modal";
 import { v4 as uuid } from "uuid";
 import { darkenColor } from "../utils/color";
+import TaskContainerForm from "./Form/TaskContainerForm";
+import TaskForm from "./Form/TaskForm";
 
 const Tasks = ({ content }) => {
+
   const initialTaskContainer= {
     id:'',
     title:'',
     color:'',
     tasks:[],
   }
+
   const [open, setOpen] = useState(false);
   const [taskName, setTaskName] = useState();
   const [taskContainer,setTaskContainer] =useState(initialTaskContainer);
   const [type,setType]= useState('');
   const dispatch = useDispatch();
+
+  const generateUId = ()=> uuid.slice(0,8);
+
   const handleAddTask = () => {
-    const unique_id = uuid();
-    const small_id = unique_id.slice(0, 8);
     const task = {
-      id: small_id,
+      id: generateUId,
       name: taskName,
     };
-    const columnId = content.id;
-    dispatch(addTask({ columnId, task }));
+    dispatch(addTask({ columnId: content.id, task }));
     setTaskName("");
     setOpen(false);
   };
+
   const handleChange=(evt)=> {
     const {name,value} = evt.target;
     setTaskContainer({
@@ -40,11 +45,11 @@ const Tasks = ({ content }) => {
       [name]: value
     });
   }
+
   const handleAddTaskContainer = (e) => {
     e.preventDefault();
-    const unique_id = uuid();
     const newContainer = {
-      id: unique_id.slice(0, 8),
+      id: generateUId(),
       title: taskContainer.title,
       color: taskContainer.color,
       tasks: taskContainer.tasks,
@@ -53,6 +58,9 @@ const Tasks = ({ content }) => {
     setTaskContainer(initialTaskContainer);
     setOpen(false);
   };
+
+  const taskColor = darkenColor(content.color, 45);
+
   return (
     <>
       <Droppable key={content.id} droppableId={content.id}>
@@ -63,8 +71,9 @@ const Tasks = ({ content }) => {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <div className="title" style={{ color: darkenColor(content.color,45) }}>
-              <div className="count" style={{ color: darkenColor(content.color,45) }}>
+
+            <div className="title" style={{ color: taskColor }}>
+              <div className="count" style={{ color: taskColor }}>
                 <b>{content.tasks.length}</b>
               </div>
               <b>{content.title}</b>
@@ -73,6 +82,7 @@ const Tasks = ({ content }) => {
                 setOpen(true)
                 }} />
             </div>
+
             {content.tasks.map((item, index) => {
               return (
                 <Task
@@ -85,12 +95,13 @@ const Tasks = ({ content }) => {
             })}
 
             {provided.placeholder}
+            
             <div
               className="addTask"
               style={{
-                backgroundColor: `${darkenColor(content.color,45)}32`,
-                borderColor: darkenColor(content.color,45),
-                color: darkenColor(content.color,45),
+                backgroundColor: `${taskColor}32`,
+                borderColor: taskColor,
+                color: taskColor,
               }}
               onClick={() => {
                 setType('Task')
@@ -104,45 +115,18 @@ const Tasks = ({ content }) => {
       </Droppable>
       <Modal isOpen={open} closeModal={() => setOpen(false)}>
         {
-          type==='Task' && (
-            <>
-            <h3>Add a Task</h3>
-            <form onSubmit={handleAddTask}>
-              <input
-                type="text"
-                name="TaskName"
-                placeholder="Enter a task"
-                value={taskName}
-                onChange={(e) => setTaskName(e.target.value)}
-                className="input"
-              />
-            </form>
-            </>
-          )
-        }
-        {
-          type==='TaskContainer' && (
-            <>
-            <h3>Add a section</h3>
-            <form onSubmit={handleAddTaskContainer}> 
-            <input
-                type="text"
-                name="title"
-                placeholder="Enter a Title"
-                value={taskContainer.title}
-                onChange={handleChange}
-                className="input"
-              />
-              <input
-                type="color"
-                name="color"
-                className="color-input"
-                placeholder="Enter a Title"
-                value={taskContainer.color}
-                onChange={handleChange}
-              />
-            </form>
-            </>
+          type==='Task' ? (
+            <TaskForm
+            taskName={taskName}
+            setTaskName={setTaskName}
+            handleAddTask={handleAddTask}
+            />
+          ):(
+            <TaskContainerForm
+            taskContainer={taskContainer}
+            handleAddTaskContainer={handleAddTaskContainer}
+            handleChange={handleChange}
+            />
           )
         }
       </Modal>
